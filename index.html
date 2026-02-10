@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <title>Surpriza pentru Laura ❤️</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1 class="titlu fade">Laura ❤️</h1>
+  <p class="fade">Vrei să fii Valentine-ul meu?</p>
+
+  <!-- Buton DA -->
+  <button onclick="showAnswer(true)" class="btn">DA 💖</button>
+
+  <!-- Buton NU -->
+  <button id="noBtn" class="btn">NU 💔</button>
+
+  <!-- Raspuns dupa DA -->
+  <div id="raspuns" class="fade" style="display:none;">
+    <h2>OMG 😍</h2>
+    <p>M-ai făcut foarte fericit!</p>
+  </div>
+
+  <!-- Galerie slider -->
+  <div class="gallery fade">
+    <h2>Amintiri 📸</h2>
+    <img id="slider" src="images/poza1.jpg" class="pic">
+  </div>
+
+  <!-- Scrisoare -->
+  <div class="letter fade">
+    <h2>O scrisoare pentru tine 💌</h2>
+    <p>
+      Bianca, fiecare zi cu tine e magia pe care n-am crezut că o voi trăi...
+      <br><br>
+      Cu drag,
+      <br>
+      [Numele tău]
+    </p>
+  </div>
+
+  <!-- Muzica -->
+  <button id="playMusic" class="btn">🎵 Ascultă muzica</button>
+  <audio id="muzica" loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- SCRIPT -->
+  <script>
+    // DA
+    function showAnswer(ok) {
+      if(ok){
+        document.getElementById("raspuns").style.display = "block";
+      }
+    }
+
+    // NU care fuge
+    const noBtn = document.getElementById("noBtn");
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 50);
+      noBtn.style.position = "absolute";
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    });
+
+    // Muzica
+    const muzica = document.getElementById("muzica");
+    document.getElementById("playMusic").addEventListener("click", () => {
+      muzica.play().catch(e => alert("Apasă din nou butonul PLAY!"));
+      document.getElementById("playMusic").style.display = "none";
+    });
+
+    // Slider poze
+    const images = ["images/poza1.jpg","images/poza2.jpg","images/poza3.jpg"];
+    let index = 0;
+    setInterval(() => {
+      index = (index + 1) % images.length;
+      document.getElementById("slider").src = images[index];
+    }, 2000);
+
+    // Fundal inimioare
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.textContent = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (15 + Math.random()*20) + "px";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 4000);
+    }, 300);
+  </script>
+
+</body>
+</html>
